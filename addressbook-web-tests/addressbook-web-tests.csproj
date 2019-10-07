@@ -59,8 +59,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\ContactData.cs" />
     <Compile Include="Pages\GroupData.cs" />
     <Compile Include="Pages\AccountData.cs" />
+    <Compile Include="Pages\Contacts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pages\Groups.cs" />
   </ItemGroup>
