@@ -63,6 +63,10 @@
     <Compile Include="Pages\GroupData.cs" />
     <Compile Include="Pages\AccountData.cs" />
     <Compile Include="Pages\Contacts.cs" />
+    <Compile Include="Pages\GroupHelper.cs" />
+    <Compile Include="Pages\LoginHelper.cs" />
+    <Compile Include="Pages\NavigationHelper.cs" />
+    <Compile Include="Pages\TestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pages\Groups.cs" />
   </ItemGroup>
