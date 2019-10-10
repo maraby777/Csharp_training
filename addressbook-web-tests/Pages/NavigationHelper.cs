@@ -16,7 +16,8 @@ namespace addressbook_web_tests.Pages
         private IWebDriver driver;
         private string baseURL;
 
-        public NavigationHelper(IWebDriver driver, string baseURL) {
+        public NavigationHelper(IWebDriver driver, string baseURL)
+        {
             this.driver = driver;
             this.baseURL = baseURL;
         }
@@ -30,7 +31,7 @@ namespace addressbook_web_tests.Pages
         {
             driver.FindElement(By.LinkText("groups")).Click();
         }
-        
+
         public void ReturnToGroupsPage()
         {
             driver.FindElement(By.LinkText("group page")).Click();

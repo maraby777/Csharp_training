@@ -14,7 +14,8 @@ namespace addressbook_web_tests.Pages
     {
         public IWebDriver driver;
 
-        public LoginHelper(IWebDriver driver) {
+        public LoginHelper(IWebDriver driver)
+        {
 
             this.driver = driver;
         }
