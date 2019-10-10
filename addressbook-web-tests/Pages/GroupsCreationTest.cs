@@ -11,7 +11,7 @@ using OpenQA.Selenium.Support.UI;
 namespace addressbook_web_tests.Pages
 {
     [TestFixture]
-    public class Groups : TestBase
+    public class GroupsCreationTest : TestBase
     {
         [Test]
         public void AddGroup()
