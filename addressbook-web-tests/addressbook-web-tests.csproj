@@ -60,10 +60,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\ContactData.cs" />
+    <Compile Include="Pages\ContactHelper.cs" />
     <Compile Include="Pages\GroupData.cs" />
     <Compile Include="Pages\AccountData.cs" />
     <Compile Include="Pages\ContactsCreationTest.cs" />
     <Compile Include="Pages\GroupHelper.cs" />
+    <Compile Include="Pages\HelperBase.cs" />
     <Compile Include="Pages\LoginHelper.cs" />
     <Compile Include="Pages\NavigationHelper.cs" />
     <Compile Include="Pages\TestBase.cs" />

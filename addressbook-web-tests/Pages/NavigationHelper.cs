@@ -11,12 +11,12 @@ using OpenQA.Selenium.Support.UI;
 
 namespace addressbook_web_tests.Pages
 {
-    public class NavigationHelper
+    public class NavigationHelper : HelperBase
     {
-        private IWebDriver driver;
         private string baseURL;
 
         public NavigationHelper(IWebDriver driver, string baseURL)
+            : base(driver)
         {
             this.driver = driver;
             this.baseURL = baseURL;
@@ -35,6 +35,16 @@ namespace addressbook_web_tests.Pages
         public void ReturnToGroupsPage()
         {
             driver.FindElement(By.LinkText("group page")).Click();
+        }
+
+        public void GoToHomePage()
+        {
+            driver.FindElement(By.LinkText("home")).Click();
+        }
+
+        public void GoToNewContactForm()
+        {
+            driver.FindElement(By.LinkText("add new")).Click();
         }
     }
 }
