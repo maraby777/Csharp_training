@@ -9,42 +9,48 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
 
-namespace addressbook_web_tests.Pages
-{
+namespace addressbook_web_tests
+{ 
+
     public class NavigationHelper : HelperBase
     {
         private string baseURL;
 
-        public NavigationHelper(IWebDriver driver, string baseURL)
-            : base(driver)
+        public NavigationHelper(ApplicationManager manager, string baseURL)
+            : base(manager)
         {
-            this.driver = driver;
+            
             this.baseURL = baseURL;
         }
 
-        public void OpenHomePage()
+        public NavigationHelper OpenHomePage()
         {
             driver.Navigate().GoToUrl(baseURL);
+            return this;
         }
 
-        public void GoToGroupTab()
+        public NavigationHelper GoToGroupTab()
         {
             driver.FindElement(By.LinkText("groups")).Click();
+            return this;
         }
 
-        public void ReturnToGroupsPage()
+        public NavigationHelper ReturnToGroupsPage()
         {
             driver.FindElement(By.LinkText("group page")).Click();
+            return this;
         }
 
-        public void GoToHomePage()
+        public NavigationHelper GoToHomePage()
         {
             driver.FindElement(By.LinkText("home")).Click();
+            return this;
         }
 
-        public void GoToNewContactForm()
+        public NavigationHelper GoToNewContactForm()
         {
             driver.FindElement(By.LinkText("add new")).Click();
+            return this;
         }
     }
 }

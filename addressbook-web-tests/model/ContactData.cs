@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace addressbook_web_tests.Pages
+namespace addressbook_web_tests
 {
     public class ContactData
     {
@@ -12,14 +12,6 @@ namespace addressbook_web_tests.Pages
         private string surname;
         private string email;
         private string phone;
-
-        public ContactData(string name, string surname, string email, string phone)
-        {
-            this.name = name;
-            this.surname = surname;
-            this.email = email;
-            this.phone = phone;
-        }
 
         public string Name
         {

@@ -8,32 +8,46 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
-namespace addressbook_web_tests.Pages
+namespace addressbook_web_tests
 {
     public class GroupHelper : HelperBase
     {
-        public GroupHelper(IWebDriver driver)
-           : base(driver)
+        public GroupHelper(ApplicationManager manager)
+           : base(manager)
         {
-            this.driver = driver;
+            driver = manager.Driver;
         }
 
-        public void InitGroupCreation()
+        public GroupHelper Create(GroupData group)
+        {
+            manager.Navigator.GoToGroupTab();
+            InitGroupCreation();
+            FillGroupForm(group);
+            Submit();
+            manager.Navigator.ReturnToGroupsPage();
+            manager.Auth.Logout();
+            return this;
+        }
+
+        public GroupHelper InitGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();
+            return this;
         }
 
-        public void GoToGroupTab()
+        public GroupHelper GoToGroupTab()
         {
             driver.FindElement(By.LinkText("groups")).Click();
+            return this;
         }
 
-        public void Submit()
+        public GroupHelper Submit()
         {
             driver.FindElement(By.Name("submit")).Click();
+            return this;
         }
 
-        public void FillGroupForm(GroupData group)
+        public GroupHelper FillGroupForm(GroupData group)
         {
             driver.FindElement(By.Name("group_name")).Click();
             driver.FindElement(By.Name("group_name")).Clear();
@@ -44,6 +58,12 @@ namespace addressbook_web_tests.Pages
             driver.FindElement(By.Name("group_footer")).Click();
             driver.FindElement(By.Name("group_footer")).Clear();
             driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
+            return this;
+        }
+
+        public GroupHelper Header()
+        {
+            return this;
         }
 
     }

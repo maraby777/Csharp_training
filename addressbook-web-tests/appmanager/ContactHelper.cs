@@ -8,17 +8,17 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
-namespace addressbook_web_tests.Pages
+namespace addressbook_web_tests
 {
     public class ContactHelper : HelperBase
     {
-        public ContactHelper(IWebDriver driver)
-            :base(driver)
+        public ContactHelper(ApplicationManager manager)
+           : base(manager)
         {
-            this.driver = driver;
+            driver = manager.Driver;
         }
 
-        public void AddNewContact(ContactData contact)
+        public ContactHelper AddNewContact(ContactData contact)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
@@ -36,6 +36,7 @@ namespace addressbook_web_tests.Pages
             driver.FindElement(By.Name("mobile")).SendKeys(contact.Phone);
             driver.FindElement(By.Name("theform")).Click();
             driver.FindElement(By.XPath("//input[21]")).Click();
+            return this;
         }
     }
 }
