@@ -63,7 +63,7 @@ namespace addressbook_web_tests
 
         private GroupHelper RemoveGroup()
         {
-            driver.FindElement(By.XPath("//body//input[2]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='delete'])[2]")).Click();
             return this;
         }
 
