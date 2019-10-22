@@ -25,7 +25,8 @@ namespace addressbook_web_tests
         public ContactHelper Remove(int p)
         {
             manager.Navigator.GoToHomePage();
-            RemoveContact(p);
+            SelectEdit(p);
+            RemoveContact();
             manager.Navigator.GoToHomePage();
             return this;
         }
@@ -33,8 +34,8 @@ namespace addressbook_web_tests
         public ContactHelper Modify(int p)
         {
             manager.Navigator.GoToHomePage();
-            SelectEdit();
-            ModifyContact(p);
+            SelectEdit(p);
+            ModifyContact();
             manager.Navigator.GoToHomePage();
             return this;
         }
@@ -44,28 +45,24 @@ namespace addressbook_web_tests
             driver.FindElement(By.Id("" + index + "")).Click();
             return this;
         }
-        public ContactHelper SelectEdit()
+        public ContactHelper SelectEdit(int index)
         {
-            driver.FindElement(By.XPath("(.//*[normalize-space(text()) and normalize-space(.)='test@test.com'])[1]/following::img[2]")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
             return this;
         }
 
-        public ContactHelper ModifyContact(int index)
+        public ContactHelper ModifyContact()
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys("change name " + DateTime.Now);
-            driver.FindElement(By.XPath("(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='update'])[2]")).Click();
             return this;
         }
 
-        public ContactHelper RemoveContact(int index)
+        public ContactHelper RemoveContact()
         {
-
-            driver.FindElement(By.Id(""+ index +"")).Click();
-            acceptNextAlert = true;
-            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
-            Assert.IsTrue(Regex.IsMatch(CloseAlertAndGetItsText(), "^Delete 1 addresses[\\s\\S]$"));
+            driver.FindElement(By.XPath("//form[2]//input[2]")).Click();
             return this;
         }
 
