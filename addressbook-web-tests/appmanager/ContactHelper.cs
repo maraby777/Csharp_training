@@ -13,9 +13,6 @@ namespace addressbook_web_tests
 {
     public class ContactHelper : HelperBase
     {
-
-        private bool acceptNextAlert = true;
-
         public ContactHelper(ApplicationManager manager)
            : base(manager)
         {
@@ -53,9 +50,7 @@ namespace addressbook_web_tests
 
         public ContactHelper ModifyContact()
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys("change name " + DateTime.Now);
+            Type(By.Name("firstname"), "change name " + DateTime.Now);
             driver.FindElement(By.XPath("(//input[@name='update'])[2]")).Click();
             return this;
         }
@@ -66,44 +61,14 @@ namespace addressbook_web_tests
             return this;
         }
 
-        private string CloseAlertAndGetItsText()
-        {
-            try
-            {
-                IAlert alert = driver.SwitchTo().Alert();
-                string alertText = alert.Text;
-                if (acceptNextAlert)
-                {
-                    alert.Accept();
-                }
-                else
-                {
-                    alert.Dismiss();
-                }
-                return alertText;
-            }
-            finally
-            {
-                acceptNextAlert = true;
-            }
-        }
-
         public ContactHelper AddNewContact(ContactData contact)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(contact.Name);
+            Type(By.Name("firstname"), contact.Name);
             driver.FindElement(By.Name("theform")).Click();
-            driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(contact.Surname);
+            Type(By.Name("lastname"), contact.Surname);
             driver.FindElement(By.Name("theform")).Click();
-            driver.FindElement(By.Name("email")).Click();
-            driver.FindElement(By.Name("email")).Clear();
-            driver.FindElement(By.Name("email")).SendKeys(contact.Email);
-            driver.FindElement(By.Name("mobile")).Click();
-            driver.FindElement(By.Name("mobile")).Clear();
-            driver.FindElement(By.Name("mobile")).SendKeys(contact.Phone);
+            Type(By.Name("email"), contact.Email);
+            Type(By.Name("mobile"), contact.Phone);
             driver.FindElement(By.Name("theform")).Click();
             driver.FindElement(By.XPath("//input[21]")).Click();
             return this;

@@ -9,13 +9,13 @@ using NUnit.Framework;
 namespace addressbook_web_tests.tests
 {
     [TestFixture]
-    public class GroupRemovalTests : TestBase
+    public class GroupRemovalTests : AuthTestBase
     {
         [Test]
         public void RemoveGroupTests()
         {
 
-            app.Groups.Remove(1);
+            app.Groups.Remove(2);
 
         }
     }
