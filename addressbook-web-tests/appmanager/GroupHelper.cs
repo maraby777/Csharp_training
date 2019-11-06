@@ -20,12 +20,12 @@ namespace addressbook_web_tests
 
         public GroupHelper Create(GroupData group)
         {
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
             manager.Navigator.GoToGroupTab();
             InitGroupCreation();
             FillGroupForm(group);
             Submit();
             manager.Navigator.ReturnToGroupsPage();
-            manager.Auth.Logout();
             return this;
         }
 

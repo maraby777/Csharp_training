@@ -13,7 +13,7 @@ namespace addressbook_web_tests.tests
     public class ContactsCreationTest : AuthTestBase
     {
         [Test]
-        public void TheContactTest()
+        public void AddContact()
         {
             ContactData contact = new ContactData();
             contact.Name = "Name " + DateTime.Now;
@@ -21,11 +21,23 @@ namespace addressbook_web_tests.tests
             contact.Surname = "Surname";
             contact.Email = "test@test.com";
 
+            app.Contact.Create(contact);
+           
+        }
+
+        [Test]
+        public void AddEmptyContact()
+        {
+            ContactData contact = new ContactData();
+            contact.Name = "";
+            contact.Phone = "";
+            contact.Surname = "";
+            contact.Email = "";
+
             app.Navigator.GoToNewContactForm();
             app.Contact.AddNewContact(contact);
             app.Navigator.GoToHomePage();
-            app.Auth.Logout();
+           
         }
-
     }
 }

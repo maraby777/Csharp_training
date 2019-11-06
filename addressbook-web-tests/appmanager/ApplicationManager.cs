@@ -26,11 +26,13 @@ namespace addressbook_web_tests
         private ApplicationManager()
         {
             driver = new FirefoxDriver();
-            baseURL = "http://localhost:8181/addressbook";
+            baseURL = "http://localhost:8181";
             loginHelper = new LoginHelper(this);
             navigator = new NavigationHelper(this, baseURL);
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
+
+//            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
         }
 
         ~ApplicationManager()
@@ -50,7 +52,7 @@ namespace addressbook_web_tests
             if ( ! app.IsValueCreated)
             {
                 ApplicationManager newInstance = new ApplicationManager();
-                newInstance.Navigator.OpenHomePage();
+                newInstance.Navigator.GoToHomePage();
                 app.Value = newInstance;
 
             }

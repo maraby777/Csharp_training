@@ -23,34 +23,47 @@ namespace addressbook_web_tests
             this.baseURL = baseURL;
         }
 
-        public NavigationHelper OpenHomePage()
+        public void GoToGroupTab()
         {
-            driver.Navigate().GoToUrl(baseURL);
-            return this;
-        }
+            if (driver.Url == baseURL + "/addressbook/group.php"
+                && IsElementPresent(By.Name("new")))
+            {
+                return;
+            }
 
-        public NavigationHelper GoToGroupTab()
-        {
             driver.FindElement(By.LinkText("groups")).Click();
-            return this;
+            
         }
 
-        public NavigationHelper ReturnToGroupsPage()
+        public void ReturnToGroupsPage()
         {
-            driver.FindElement(By.LinkText("group page")).Click();
-            return this;
+            if (driver.Url == baseURL + "/addressbook/group.php"
+                 && IsElementPresent(By.Name("new")))
+            {
+                return;
+            }
+            driver.Navigate().GoToUrl(baseURL + "/addressbook/group.php");
         }
 
-        public NavigationHelper GoToHomePage()
+        public void GoToHomePage()
         {
-            driver.FindElement(By.LinkText("home")).Click();
-            return this;
+            if (driver.Url == baseURL + "/addressbook/"
+                && IsElementPresent(By.Name("new")))
+            {
+                return;
+            }
+            driver.Navigate().GoToUrl(baseURL + "/addressbook/");
         }
 
-        public NavigationHelper GoToNewContactForm()
+        public void GoToNewContactForm()
         {
-            driver.FindElement(By.LinkText("add new")).Click();
-            return this;
+            if (driver.Url == baseURL + "/addressbook/edit.php"
+                && IsElementPresent(By.Name("firstname")))
+            {
+                return;
+            }
+            driver.Navigate().GoToUrl(baseURL + "/addressbook/edit.php");
+
         }
     }
 }

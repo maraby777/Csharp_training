@@ -28,6 +28,14 @@ namespace addressbook_web_tests
             return this;
         }
 
+        public ContactHelper Create(ContactData contact)
+        {
+            manager.Navigator.GoToNewContactForm();
+            manager.Contact.AddNewContact(contact);
+            manager.Navigator.GoToHomePage();
+            return this;
+        }
+
         public ContactHelper Modify(int p)
         {
             manager.Navigator.GoToHomePage();

@@ -36,9 +36,10 @@ namespace addressbook_web_tests
 
         public bool IsLoggedIn(AccountData account)
         {
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
             return IsLoggedIn()
                 && driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text 
-                == "(" + account.Username+ ")";
+                    == "(" + account.Username+ ")";
         }
 
         public bool IsLoggedIn()
