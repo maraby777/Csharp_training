@@ -19,6 +19,26 @@ namespace addressbook_web_tests
             driver = manager.Driver;
         }
 
+        #region(check if contact rpesent)
+        public void Prepare()
+        {
+            if (IsContactPresent() != true)
+            {
+                ContactData contact = new ContactData();
+                contact.Name = "Name2 " + DateTime.Now;
+                contact.Phone = "1112223332";
+                contact.Surname = "Surname2";
+                contact.Email = "test@test.com2";
+
+                Create(contact);            }
+        }
+
+        public bool IsContactPresent()
+        {
+            return IsElementPresent(By.Name("selected[]"));
+        }
+        #endregion
+
         public ContactHelper Remove(int p)
         {
             manager.Navigator.GoToHomePage();

@@ -32,7 +32,7 @@ namespace addressbook_web_tests
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
 
-//            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
         }
 
         ~ApplicationManager()

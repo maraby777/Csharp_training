@@ -14,8 +14,8 @@ namespace addressbook_web_tests.tests
         [Test]
         public void RemoveGroupTests()
         {
-
-            app.Groups.Remove(2);
+            app.Groups.Prepare();
+            app.Groups.Remove(1);
 
         }
     }

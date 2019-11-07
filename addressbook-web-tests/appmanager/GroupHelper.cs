@@ -18,6 +18,25 @@ namespace addressbook_web_tests
             driver = manager.Driver;
         }
 
+        #region(check if group present)
+        public void Prepare()
+        {
+            if (IsGroupPresent() != true)
+            {
+                GroupData group = new GroupData("new " + DateTime.Now);
+                group.Header = "new_header_test";
+                group.Footer = "new_footer_test";
+
+                Create(group);
+            }
+        }
+
+        public bool IsGroupPresent()
+        {
+            return IsElementPresent(By.Name("selected[]"));
+        }
+        #endregion
+
         public GroupHelper Create(GroupData group)
         {
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
