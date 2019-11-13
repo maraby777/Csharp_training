@@ -31,6 +31,20 @@ namespace addressbook_web_tests
             }
         }
 
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+
+            manager.Navigator.GoToGroupTab();
+
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach (IWebElement element in elements)
+            {
+                groups.Add(new GroupData(element.Text));
+            }
+            return groups;
+        }
+
         public bool IsGroupPresent()
         {
             return IsElementPresent(By.Name("selected[]"));
@@ -68,6 +82,7 @@ namespace addressbook_web_tests
 
         public GroupHelper Remove(int p)
         {
+            manager.Navigator.GoToGroupTab();
             SelectGroup(p);
             RemoveGroup();
             manager.Navigator.GoToGroupTab();
@@ -88,7 +103,7 @@ namespace addressbook_web_tests
 
         private GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.XPath("//span[" + index + "]/input")).Click();
+            driver.FindElement(By.XPath("//span[" + (index+1) + "]/input")).Click();
             return this;
         }
 

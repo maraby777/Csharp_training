@@ -6,13 +6,27 @@ using System.Threading.Tasks;
 
 namespace addressbook_web_tests
 {
-    public class ContactData
+    public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string name;
         private string surname;
         private string email;
         private string phone;
 
+        public ContactData(string surname, string name)
+        {
+            this.name = name;
+            this.surname = surname;
+        }
+        public ContactData(string surname)
+        {
+            this.surname = surname;
+        }
+        public ContactData()
+        {
+            
+        }
+    
         public string Name
         {
             get
@@ -63,6 +77,44 @@ namespace addressbook_web_tests
             {
                 phone = value;
             }
+        }
+
+        public bool Equals(ContactData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return false;
+            }
+
+            if (Object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return Surname == other.Surname;// && Name == other.Name);
+        }
+
+        public override int GetHashCode()
+        {
+            //return Name.GetHashCode();
+            return 0;                                                   //lekcja 4.2,w konce
+        }
+
+        public override string ToString()
+        {
+
+            return "Surname, Name = " + Surname + ", " + Name;
+
+        }
+
+        public int CompareTo(ContactData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return 1;
+            }
+
+            return Name.CompareTo(other.Name);
         }
     }
 }
