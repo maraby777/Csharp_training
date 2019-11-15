@@ -41,8 +41,9 @@ namespace addressbook_web_tests
             ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
             foreach (IWebElement element in elements)
             {
-                ContactData contact = new ContactData(element.Text);
-                contacts.Add(new ContactData(element.Text));
+                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                ContactData contact = new ContactData(cells[1].Text, cells[2].Text);
+                contacts.Add(new ContactData(cells[1].Text, cells[2].Text));
             }
             return contacts;
         }
@@ -86,7 +87,7 @@ namespace addressbook_web_tests
         }
         public ContactHelper SelectEdit(int index)
         {
-            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + 1 + "]")).Click();
             return this;
         }
 

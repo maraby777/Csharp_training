@@ -14,7 +14,16 @@ namespace addressbook_web_tests.tests
         public void RemoveContactTests()
         {
             app.Contact.Prepare();
-            app.Contact.Remove(1);
+
+            List<ContactData> oldContactList = app.Contact.GetContactList();
+
+            app.Contact.Remove(0);
+
+            List<ContactData> newContactList = app.Contact.GetContactList();
+
+            oldContactList.RemoveAt(0);
+
+            Assert.AreEqual(oldContactList, newContactList);
 
         }
 

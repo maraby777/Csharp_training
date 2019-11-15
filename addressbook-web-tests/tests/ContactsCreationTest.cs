@@ -32,6 +32,7 @@ namespace addressbook_web_tests.tests
             newContactList.Sort();
             Assert.AreEqual(oldContactList, newContactList);
 
+            app.Navigator.GoToHomePage();
 
         }
 
@@ -44,19 +45,17 @@ namespace addressbook_web_tests.tests
             contact.Surname = "";
             contact.Email = "";
 
+            List<ContactData> oldContactList = app.Contact.GetContactList();
             app.Navigator.GoToNewContactForm();
 
-            List<ContactData> oldContactList = app.Contact.GetContactList();
-
             app.Contact.AddNewContact(contact);
+            app.Navigator.GoToHomePage();
 
             List<ContactData> newContactList = app.Contact.GetContactList();
             oldContactList.Add(contact);
             oldContactList.Sort();
             newContactList.Sort();
             Assert.AreEqual(oldContactList, newContactList);
-
-            app.Navigator.GoToHomePage();
            
         }
     }

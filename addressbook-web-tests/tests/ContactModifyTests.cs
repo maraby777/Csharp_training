@@ -14,8 +14,16 @@ namespace addressbook_web_tests.tests
         public void ModifyContactNameTests()
         {
             app.Contact.Prepare();
-            app.Contact.Modify(1);
 
+
+            List<ContactData> oldContactList = app.Contact.GetContactList();
+
+            app.Contact.Modify(0);
+
+            List<ContactData> newContactList = app.Contact.GetContactList();
+            oldContactList.Sort();
+            newContactList.Sort();
+            Assert.AreEqual(oldContactList, newContactList);
         }
 
     }

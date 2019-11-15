@@ -103,7 +103,7 @@ namespace addressbook_web_tests
         public override string ToString()
         {
 
-            return "Surname, Name = " + Surname + ", " + Name;
+            return " Name = " +  Name;
 
         }
 
@@ -114,7 +114,7 @@ namespace addressbook_web_tests
                 return 1;
             }
 
-            return Name.CompareTo(other.Name);
+            return (Name.CompareTo(other.Name) + Surname.CompareTo(other.Surname));
         }
     }
 }
