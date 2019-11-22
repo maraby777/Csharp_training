@@ -14,8 +14,7 @@ namespace addressbook_web_tests.tests
         public void ModifyContactNameTests()
         {
             app.Contact.Prepare();
-
-
+            
             List<ContactData> oldContactList = app.Contact.GetContactList();
 
             app.Contact.Modify(0);

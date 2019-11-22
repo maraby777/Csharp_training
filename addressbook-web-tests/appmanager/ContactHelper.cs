@@ -93,7 +93,7 @@ namespace addressbook_web_tests
 
         public ContactHelper ModifyContact()
         {
-            Type(By.Name("firstname"), "change name " + DateTime.Now);
+            Type(By.Name("firstname"), "Name change name ");
             driver.FindElement(By.XPath("(//input[@name='update'])[2]")).Click();
             return this;
         }

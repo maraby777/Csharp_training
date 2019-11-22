@@ -91,7 +91,7 @@ namespace addressbook_web_tests
                 return true;
             }
 
-            return Surname == other.Surname;// && Name == other.Name);
+            return Surname == other.Surname && Name == other.Name;
         }
 
         public override int GetHashCode()
@@ -114,7 +114,14 @@ namespace addressbook_web_tests
                 return 1;
             }
 
-            return (Name.CompareTo(other.Name) + Surname.CompareTo(other.Surname));
+            int compareResult = Surname.CompareTo(other.Surname);
+
+            if (compareResult == 0)
+            {
+                return Name.CompareTo(other.Name);
+            }
+
+            return compareResult;
         }
     }
 }
