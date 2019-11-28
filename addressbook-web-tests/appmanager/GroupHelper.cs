@@ -31,18 +31,27 @@ namespace addressbook_web_tests
             }
         }
 
+        public int GetGroupCount()
+        {
+            return driver.FindElements(By.CssSelector("span.group")).Count;
+        }
+
+        private List<GroupData> groupCache = null;
+
         public List<GroupData> GetGroupList()
         {
-            List<GroupData> groups = new List<GroupData>();
-
-            manager.Navigator.GoToGroupTab();
-
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
-            foreach (IWebElement element in elements)
+            if (groupCache == null)
             {
-                groups.Add(new GroupData(element.Text));
-            }
-            return groups;
+                groupCache = new List<GroupData>();
+
+                manager.Navigator.GoToGroupTab();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+                foreach (IWebElement element in elements)
+                {
+                    groupCache.Add(new GroupData(element.Text));
+                }
+            }                        
+            return new List<GroupData>(groupCache);
         }
 
         public bool IsGroupPresent()
@@ -76,6 +85,7 @@ namespace addressbook_web_tests
         public GroupHelper Update()
         {
             driver.FindElement(By.Name("update")).Click();
+            groupCache = null;
             return this;
 
         }
@@ -98,6 +108,7 @@ namespace addressbook_web_tests
         private GroupHelper RemoveGroup()
         {
             driver.FindElement(By.XPath("//body//input[2]")).Click();
+            groupCache = null;
             return this;
         }
 
@@ -122,6 +133,7 @@ namespace addressbook_web_tests
         public GroupHelper Submit()
         {
             driver.FindElement(By.Name("submit")).Click();
+            groupCache = null;
             return this;
         }
 

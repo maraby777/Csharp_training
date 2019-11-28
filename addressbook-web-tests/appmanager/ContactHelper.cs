@@ -33,19 +33,24 @@ namespace addressbook_web_tests
                 Create(contact);            }
         }
 
+        private List<ContactData> contactCache = null;
+
         public List<ContactData> GetContactList()
         {
-            List<ContactData> contacts = new List<ContactData>();
-
-            manager.Navigator.GoToHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
-            foreach (IWebElement element in elements)
+            if (contactCache == null)
             {
-                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
-                ContactData contact = new ContactData(cells[1].Text, cells[2].Text);
-                contacts.Add(new ContactData(cells[1].Text, cells[2].Text));
+                contactCache = new List<ContactData>();
+
+                manager.Navigator.GoToHomePage();
+                ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
+                foreach (IWebElement element in elements)
+                {
+                    IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                    ContactData contact = new ContactData(cells[1].Text, cells[2].Text);
+                    contactCache.Add(new ContactData(cells[1].Text, cells[2].Text));
+                }
             }
-            return contacts;
+            return new List<ContactData>(contactCache);
         }
 
         public bool IsContactPresent()
@@ -95,12 +100,14 @@ namespace addressbook_web_tests
         {
             Type(By.Name("firstname"), "Name change name ");
             driver.FindElement(By.XPath("(//input[@name='update'])[2]")).Click();
+            contactCache = null;
             return this;
         }
 
         public ContactHelper RemoveContact()
         {
             driver.FindElement(By.XPath("//form[2]//input[2]")).Click();
+            contactCache = null;
             return this;
         }
 
@@ -114,6 +121,7 @@ namespace addressbook_web_tests
             Type(By.Name("mobile"), contact.Phone);
             driver.FindElement(By.Name("theform")).Click();
             driver.FindElement(By.XPath("//input[21]")).Click();
+            contactCache = null;
             return this;
         }
 
