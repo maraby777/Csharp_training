@@ -8,75 +8,58 @@ namespace addressbook_web_tests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        private string name;
-        private string surname;
-        private string email;
-        private string phone;
+        private string allPhones;
 
         public ContactData(string surname, string name)
         {
-            this.name = name;
-            this.surname = surname;
+            Name = name;
+            Surname = surname;
         }
         public ContactData(string surname)
         {
-            this.surname = surname;
+            Surname = surname;
         }
         public ContactData()
         {
             
         }
     
-        public string Name
-        {
+        public string Name{get; set;}
+        public string Surname{ get; set; }
+        public string Email { get; set; }
+        public string MobilePhone { get; set; }
+        public string Address { get; set; }
+        public string WorkPhone { get; set; }
+        public string HomePhone { get; set; }
+
+        public string AllPhones {
             get
             {
-                return name;
+                if (allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return Cleanup(HomePhone) + Cleanup(MobilePhone) + Cleanup(WorkPhone);
+                }
             }
 
             set
             {
-                name = value;
-            }
-        }
+                allPhones = value;
+            } }
 
-        public string Surname
+        private string Cleanup(string phone)
         {
-            get
+            if (phone == null)
             {
-                return surname;
+                return "";
             }
-
-            set
-            {
-                surname = value;
-            }
-        }
-
-        public string Email
-        {
-            get
-            {
-                return email;
-            }
-
-            set
-            {
-                email = value;
-            }
-        }
-
-        public string Phone
-        {
-            get
-            {
-                return phone;
-            }
-
-            set
-            {
-                phone = value;
-            }
+            return phone.Replace(" ", "")
+                .Replace("-", "")
+                .Replace(")", "")
+                .Replace("(", "");
         }
 
         public bool Equals(ContactData other)

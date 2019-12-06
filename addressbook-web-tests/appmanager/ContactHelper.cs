@@ -19,6 +19,56 @@ namespace addressbook_web_tests
             driver = manager.Driver;
         }
 
+        internal ContactData GetContactInformationFromEditForm(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            InitModifyContact(0);
+
+            string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
+            string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
+            string address = driver.FindElement(By.Name("address")).GetAttribute("value");
+
+            string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
+            string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
+            string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+
+            return new ContactData(firstName, lastName)
+            {
+                Address = address,
+                HomePhone = homePhone,
+                MobilePhone = mobilePhone,
+                WorkPhone = workPhone
+            };
+
+        }
+
+
+        private void InitModifyContact(int index)
+        {
+            driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"))[7]
+                .FindElement(By.TagName("a")).Click();
+        }
+
+        internal ContactData GetContactInformationFromTable(int index)
+        {
+            manager.Navigator.GoToHomePage();
+
+            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index]
+                                              .FindElements(By.TagName("td"));
+
+            string lastName = cells[1].Text;
+            string firstName = cells[2].Text;
+            string address = cells[3].Text;
+            string allPhones = cells[5].Text;
+
+            return new ContactData(firstName, lastName)
+            {
+                Address = address,
+                AllPhones = allPhones
+            };
+        }
+
         #region(check if contact rpesent)
         public void Prepare()
         {
@@ -26,7 +76,7 @@ namespace addressbook_web_tests
             {
                 ContactData contact = new ContactData();
                 contact.Name = "Name2 " + DateTime.Now;
-                contact.Phone = "1112223332";
+                contact.MobilePhone = "1112223332";
                 contact.Surname = "Surname2";
                 contact.Email = "test@test.com2";
 
@@ -118,7 +168,7 @@ namespace addressbook_web_tests
             Type(By.Name("lastname"), contact.Surname);
             driver.FindElement(By.Name("theform")).Click();
             Type(By.Name("email"), contact.Email);
-            Type(By.Name("mobile"), contact.Phone);
+            Type(By.Name("mobile"), contact.MobilePhone);
             driver.FindElement(By.Name("theform")).Click();
             driver.FindElement(By.XPath("//input[21]")).Click();
             contactCache = null;

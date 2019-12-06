@@ -18,7 +18,7 @@ namespace addressbook_web_tests.tests
         {
             ContactData contact = new ContactData();
             contact.Name = "Name " + DateTime.Now;
-            contact.Phone = "111222333";
+            contact.MobilePhone = "111222333";
             contact.Surname = "Surname";
             contact.Email = "test@test.com";
 
@@ -41,7 +41,7 @@ namespace addressbook_web_tests.tests
         {
             ContactData contact = new ContactData();
             contact.Name = "";
-            contact.Phone = "";
+            contact.MobilePhone = "";
             contact.Surname = "";
             contact.Email = "";
 
